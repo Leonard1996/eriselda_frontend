@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import TeacherDashboard from './TeacherDashboard'
 import SearchPage from '../Search.js/SearchPage'
 import { Layout } from 'antd'
+import StudentDashboard from './StudentDashboard'
 
 const { Header, Footer, Content } = Layout
 
