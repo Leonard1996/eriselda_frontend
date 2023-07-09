@@ -6,17 +6,6 @@ import NavBar from "./globals/components/NavBar";
 
 function App() {
   return (
-    // <div>
-    //   <header>
-    //     {state.isAuthenticated ? (
-    //       <p>Successful logged in</p>
-    //     ) : (
-    //       <p>
-    //         <button onClick={login}>Log In</button>
-    //       </p>
-    //     )}
-    //   </header>
-    // </div>
     <LanguageContext>
       <BrowserRouter>
         <NavBar />

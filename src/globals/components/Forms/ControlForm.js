@@ -1,25 +1,38 @@
-import { Button, Form, Select, Upload, Input } from 'antd'
-import { useState } from 'react'
-import { InboxOutlined, ReadOutlined } from '@ant-design/icons'
-const { TextArea } = Input
-const { Dragger } = Upload
+import { Button, Form, Select, Upload, Input } from "antd";
+import { InboxOutlined } from "@ant-design/icons";
+import { useState } from "react";
+const { TextArea } = Input;
+const { Dragger } = Upload;
 
 const ControlForm = ({ setFile, diploma }) => {
+  const [selectedItem, setSelectedItem] = useState();
+
+  const handleChange = (value) => {
+    console.log(value);
+    setSelectedItem(value);
+  };
   return (
     <Form style={{ paddingTop: 20 }} size="large">
       <Form.Item label="Tema">
         <TextArea />
       </Form.Item>
       <Form.Item label="Udhëheqësi">
-        <Select placeholder="Zgjidhni udhëheqësin tuaj te diplomës" style={{}} options={diploma?.teachers.map((teacher) => ({ value: teacher.id, label: teacher.name })) || []}></Select>
+        <Select
+          mode=""
+          value={selectedItem}
+          onSelect={(e) => console.log(e)}
+          onChange={(e) => handleChange(e)}
+          placeholder="Zgjidhni udhëheqësin tuaj te diplomës"
+          options={diploma?.teachers?.map((teacher) => ({ value: teacher.teacherid, label: teacher.name }))}
+        />
       </Form.Item>
       <Form.Item label="Dokumenti">
         <Dragger
           maxCount={1}
           accept=".pdf, .doc"
           beforeUpload={(file) => {
-            setFile(file)
-            return false
+            setFile(file);
+            return false;
           }}
         >
           <p className="ant-upload-drag-icon">
@@ -29,12 +42,12 @@ const ControlForm = ({ setFile, diploma }) => {
         </Dragger>
       </Form.Item>
       <Form.Item>
-        <Button type="primary" style={{ width: '100%', height: 50 }}>
+        <Button type="primary" style={{ width: "100%", height: 50 }}>
           Dërgo
         </Button>
       </Form.Item>
     </Form>
-  )
-}
+  );
+};
 
-export default ControlForm
+export default ControlForm;
