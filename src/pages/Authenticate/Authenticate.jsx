@@ -1,14 +1,14 @@
-import React from "react";
-import logo from "../../assets/images/logo.jpeg";
-import { Typography, Button } from "antd";
-import { Context } from "../../context/LanguageContext";
-import language from "../../assets/i18n/language";
-import { PublicClientApplication } from "@azure/msal-browser";
-import { config } from "../../Config";
-import { authService } from "./authenticate.service";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import logo from '../../assets/images/logo.jpeg'
+import { Typography, Button } from 'antd'
+import { Context } from '../../context/LanguageContext'
+import language from '../../assets/i18n/language'
+import { PublicClientApplication } from '@azure/msal-browser'
+import { config } from '../../Config'
+import { authService } from './authenticate.service'
+import { useNavigate } from 'react-router-dom'
 
-const { Title } = Typography;
+const { Title } = Typography
 const publicClientApplication = new PublicClientApplication({
   auth: {
     clientId: config.appId,
@@ -16,33 +16,32 @@ const publicClientApplication = new PublicClientApplication({
     authority: config.authority,
   },
   cache: {
-    cacheLocation: "sessionStorage",
+    cacheLocation: 'sessionStorage',
     storeAuthStateInCookie: true,
   },
-});
+})
 
 export default function Authenticate() {
-  const { state } = React.useContext(Context);
-  const navigate = useNavigate();
-
+  const { state } = React.useContext(Context)
+  const navigate = useNavigate()
   const onSuccess = (result) => {
-    navigate("/home", {
+    navigate('/home', {
       state: result,
-    });
-  };
+    })
+  }
 
   const handleAuthClick = () => {
-    authService.azureLogin(onSuccess, publicClientApplication);
-  };
+    authService.azureLogin(onSuccess, publicClientApplication)
+  }
 
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "80vh",
-        flexDirection: "column",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '80vh',
+        flexDirection: 'column',
       }}
     >
       <div>
@@ -57,5 +56,5 @@ export default function Authenticate() {
         </Button>
       </div>
     </div>
-  );
+  )
 }
