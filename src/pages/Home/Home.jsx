@@ -22,13 +22,10 @@ export default function Home() {
   }
   useEffect(() => {
     if (state) {
+      console.log(state)
       callLogin()
     }
   }, [])
 
-  return (
-    <WithLoader isLoading={isLoading}>
-      <TeacherDashboard />
-    </WithLoader>
-  )
+  return <WithLoader isLoading={isLoading}>{JSON.parse(localStorage.getItem('authData')).user.role === 'student' ? <StudentDashboard /> : <TeacherDashboard />}</WithLoader>
 }

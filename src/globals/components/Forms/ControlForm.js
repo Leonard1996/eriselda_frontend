@@ -4,14 +4,14 @@ import { InboxOutlined, ReadOutlined } from '@ant-design/icons'
 const { TextArea } = Input
 const { Dragger } = Upload
 
-const ControlForm = ({ setFile }) => {
+const ControlForm = ({ setFile, diploma }) => {
   return (
     <Form style={{ paddingTop: 20 }} size="large">
       <Form.Item label="Tema">
         <TextArea />
       </Form.Item>
       <Form.Item label="Udhëheqësi">
-        <Select placeholder="Zgjidhni udhëheqësin tuaj te diplomës" style={{}}></Select>
+        <Select placeholder="Zgjidhni udhëheqësin tuaj te diplomës" style={{}} options={diploma?.teachers.map((teacher) => ({ value: teacher.id, label: teacher.name })) || []}></Select>
       </Form.Item>
       <Form.Item label="Dokumenti">
         <Dragger

@@ -1,6 +1,6 @@
 import { ContainerOutlined, ReadOutlined } from '@ant-design/icons'
 
-export const BASE_API = 'http://192.168.11.207:3001'
+export const BASE_API = 'http://38.242.237.75:3333'
 
 export const controlLabels = [
   {
