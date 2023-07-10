@@ -16,16 +16,15 @@ const StudentDashboard = () => {
 
   const getInfo = async () => {
     const response = await homeService.getDiploma(+current + 1)
-
     setDiploma(response?.data)
     if (response?.data?.diploma) {
       setControl({
         ...response?.data.control,
-        from: dayjs().year(response?.data.control.from),
-        to: dayjs().year(response?.data.control.to),
+        from: dayjs().year(response.data?.control?.from ?? null),
+        to: dayjs().year(response.data?.control?.to ?? null),
         teacherId: {
-          value: response?.data?.control?.teacher?.id,
-          label: response?.data?.control?.teacher?.name,
+          value: response.data?.control?.teacher?.id,
+          label: response.data?.control?.teacher?.name,
         },
         uniqueNumber: response?.data?.control?.student?.uniqueNumber,
       })
@@ -33,7 +32,6 @@ const StudentDashboard = () => {
   }
   const [api, contextHolder] = notification.useNotification(current)
   const openNotificationWithIcon = (type) => {
-    console.log(type)
     api[type]({
       message: 'Sukses!',
       description: 'Kontrolli u dorëzua me sukses!',
@@ -49,7 +47,7 @@ const StudentDashboard = () => {
   }
   const createDiplomaHandler = async (formData) => {
     const result = await createDiploma(formData)
-    if (result.request?.status == 200) {
+    if (result?.request?.status == 200) {
       openNotificationWithIcon('success')
     }
     getInfo()

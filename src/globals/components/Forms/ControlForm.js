@@ -13,16 +13,16 @@ const ControlForm = ({ setFile, diploma, current, createDiploma, disabled, contr
   const [selectedItem, setSelectedItem] = useState({})
   const [period, setPeriod] = useState()
   const formData = new FormData()
-  console.log(control, 'here')
-  //control.from = dayjs()
 
   const submitHandler = async (data) => {
     console.log(data.document)
-    data.document = data.document.file
-    data.rank = current
-    data.from = period?.from
+    data.document = data.document?.file ?? file
+    data.rank = +current + 1
+    data.from = '2000'
     data.to = period?.to
-    console.log(data)
+    data.diplomaId = diploma.diploma.diplomaId ?? null
+    data.studentId = diploma.diploma.studentId ?? null
+
     for (const key in data) {
       formData.append(key, data[key])
     }
@@ -54,10 +54,10 @@ const ControlForm = ({ setFile, diploma, current, createDiploma, disabled, contr
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <label>Viti:</label>
             <Form.Item label="Nga">
-              <DatePicker picker="year" name="from" onChange={(e) => handleData(e?.$y, 'from')} value={control.from} />
+              <DatePicker picker="year" name="from" onChange={(e) => handleData(e?.$y, 'from')} defaultValue={control.from ?? dayjs()} />
             </Form.Item>
             <Form.Item label="From">
-              <DatePicker picker="year" name="to" onChange={(e) => handleData(e?.$y, 'to')} value={control.to} />
+              <DatePicker picker="year" name="to" onChange={(e) => handleData(e?.$y, 'to')} defaultValue={control.to ?? dayjs()} />
             </Form.Item>
           </div>
           <Form.Item label="Numri Matrikullimit" name="uniqueNumber">

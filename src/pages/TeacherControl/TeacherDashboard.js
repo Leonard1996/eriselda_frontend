@@ -17,7 +17,7 @@ const TeacherDashboard = () => {
     console.log('here')
     const response = await getDiplomasForTeacher(page)
     //setPage((prevPage) => page + 1)
-    setData(response.data?.students)
+    setData(response.data?.students.map((student) => ({ ...student, key: student.id })))
   }
 
   useEffect(() => {
@@ -27,42 +27,43 @@ const TeacherDashboard = () => {
     console.log('click ', e)
     setCurrent(e.key)
   }
-  const dataSource = [
-    {
-      key: '1',
-      tema: 'MikesbAJHBVDJHLJSBDCS HHUDEBUE HAHHHHAS JDHDHDPP  HJEWHEHE',
-      studenti: 'Eriselda Hoxha',
-      statusi: '10 Downing Street',
-    },
-    {
-      key: '2',
-      tema: 'John',
-      studenti: 42,
-      statusi: '10 Downing Street',
-    },
-    {
-      key: '3',
-      tema: 'John',
-      studenti: 42,
-      statusi: '10 Downing Street',
-    },
-  ]
+
+  // const dataSource = [
+  //   {
+  //     key: '1',
+  //     tema: 'MikesbAJHBVDJHLJSBDCS HHUDEBUE HAHHHHAS JDHDHDPP  HJEWHEHE',
+  //     studenti: 'Eriselda Hoxha',
+  //     statusi: '10 Downing Street',
+  //   },
+  //   {
+  //     key: '2',
+  //     tema: 'John',
+  //     studenti: 42,
+  //     statusi: '10 Downing Street',
+  //   },
+  //   {
+  //     key: '3',
+  //     tema: 'John',
+  //     studenti: 42,
+  //     statusi: '10 Downing Street',
+  //   },
+  // ]
 
   const columns = [
     {
       title: 'Studenti',
-      dataIndex: 'studenti',
-      key: 'studenti',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
       title: 'Tema',
-      dataIndex: 'tema',
-      key: 'tema',
+      dataIndex: 'title',
+      key: 'title',
     },
     {
       title: 'Statusi',
-      dataIndex: 'statusi',
-      key: 'statusi',
+      dataIndex: 'status',
+      key: 'status',
     },
     {
       title: 'Veprime',
@@ -81,7 +82,7 @@ const TeacherDashboard = () => {
         <Menu onClick={onClick} defaultActiveFirst={1} selectedKeys={[current]} mode="horizontal" items={controlLabels} style={{ fontSize: 20 }} />
         <Table
           className="custom-table"
-          dataSource={dataSource}
+          dataSource={data}
           columns={columns}
           pagination={{
             pageSize: 10,
