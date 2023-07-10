@@ -2,13 +2,14 @@ import { Button, Form, Select, Upload, Input, DatePicker, notification } from 'a
 import { InboxOutlined, SmileOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { createDiploma } from '../../../pages/Home/home.service'
+import { BASE_API } from '../../constants'
 const dayjs = require('dayjs')
 
 const { TextArea } = Input
 const { Dragger } = Upload
 const { Option } = Select
 
-const ControlForm = ({ setFile, diploma, current, createDiploma, disabled, control }) => {
+const ControlForm = ({ setFile, diploma, current, createDiploma, disabled, control, file }) => {
   const [selectedItem, setSelectedItem] = useState({})
   const [period, setPeriod] = useState()
   const formData = new FormData()
@@ -76,6 +77,7 @@ const ControlForm = ({ setFile, diploma, current, createDiploma, disabled, contr
               </p>
               <p className="ant-upload-text">Kliko për të ngarkuar dokumentin</p>
             </Dragger>
+            <div>{control.document && !file && <a href={BASE_API + '/' + control.document}>{control.document}</a>}</div>
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" style={{ width: '100%', height: 50 }}>

@@ -10,7 +10,7 @@ import dayjs from 'dayjs'
 
 const StudentDashboard = () => {
   const [current, setCurrent] = useState(0)
-  const [file, setFile] = useState({})
+  const [file, setFile] = useState()
   const [diploma, setDiploma] = useState()
   const [control, setControl] = useState()
 
@@ -18,8 +18,17 @@ const StudentDashboard = () => {
     const response = await homeService.getDiploma(+current + 1)
 
     setDiploma(response?.data)
-    if (response?.data?.diplomas[0]) {
-      setControl({ ...response?.data?.diplomas[0]?.controls[0], from: dayjs().year(response?.data?.diplomas[0]?.controls[0].from), to: dayjs().year(response?.data?.diplomas[0]?.controls[0].to) })
+    if (response?.data?.diploma) {
+      setControl({
+        ...response?.data.control,
+        from: dayjs().year(response?.data.control.from),
+        to: dayjs().year(response?.data.control.to),
+        teacherId: {
+          value: response?.data?.control?.teacher?.id,
+          label: response?.data?.control?.teacher?.name,
+        },
+        uniqueNumber: response?.data?.control?.student?.uniqueNumber,
+      })
     }
   }
   const [api, contextHolder] = notification.useNotification(current)
@@ -59,7 +68,7 @@ const StudentDashboard = () => {
             diploma={diploma}
             current={current}
             control={control}
-            disabled={control?.status === 'Mbyllur' || control?.status !== 'Ne pritje' || control?.status === 'Pranuar'}
+            disabled={control?.status === 'Mbyllur' || control?.status === 'Ne pritje' || control?.status === 'Pranuar'}
             createDiploma={createDiplomaHandler}
           />
         </Col>
