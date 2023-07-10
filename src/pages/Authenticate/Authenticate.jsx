@@ -7,6 +7,7 @@ import { PublicClientApplication } from '@azure/msal-browser'
 import { config } from '../../Config'
 import { authService } from './authenticate.service'
 import { useNavigate } from 'react-router-dom'
+import { Footer } from 'antd/es/layout/layout'
 
 const { Title } = Typography
 const publicClientApplication = new PublicClientApplication({
@@ -35,26 +36,31 @@ export default function Authenticate() {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '80vh',
-        flexDirection: 'column',
-      }}
-    >
-      <div>
-        <img src={logo} height={150} width="auto" />
+    <>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '80vh',
+          flexDirection: 'column',
+        }}
+      >
+        <div>
+          <img src={logo} height={250} width="auto" />
+        </div>
+        <div>
+          <Title>{language.loginTitle[state.language]}</Title>
+        </div>
+        <div>
+          <Button type="primary" size="large" style={{ width: 200, height: 55, fontSize: 25 }} width={400} onClick={handleAuthClick}>
+            {language.loginButton[state.language]}
+          </Button>
+        </div>
       </div>
-      <div>
-        <Title>{language.loginTitle[state.language]}</Title>
-      </div>
-      <div>
-        <Button type="primary" size="large" onClick={handleAuthClick}>
-          {language.loginButton[state.language]}
-        </Button>
-      </div>
-    </div>
+      <footer style={{ display: 'block', textAlign: 'center', paddingTop: 60 }}>
+        Contact: <a href={'https://www.fti.edu.al/'}>fti.edu.al</a>
+      </footer>
+    </>
   )
 }

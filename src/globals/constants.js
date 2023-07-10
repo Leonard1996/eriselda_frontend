@@ -1,23 +1,24 @@
-import { ContainerOutlined, ReadOutlined } from "@ant-design/icons";
+import { ContainerOutlined, ReadOutlined } from '@ant-design/icons'
 
-export const BASE_API = "http://localhost:3001";
+export const BASE_API = 'http://38.242.237.75:3333'
+//http://38.242.237.75:3333
 
 export const controlLabels = [
   {
-    label: "Kontrolli I",
-    key: "kontrolli1",
-    icon: <ReadOutlined />,
+    label: 'Kontrolli I',
+    key: 1,
+    icon: <ContainerOutlined />,
   },
   {
-    label: "Kontrolli II",
-    key: "kontrolli2",
+    label: 'Kontrolli II',
+    key: 2,
     icon: <ContainerOutlined />,
     disabled: false,
   },
   {
-    label: "Kontrolli III",
-    key: "kontrolli3",
+    label: 'Kontrolli III',
+    key: 3,
     icon: <ContainerOutlined />,
     disabled: false,
   },
-];
+]

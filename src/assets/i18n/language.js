@@ -1,12 +1,12 @@
 const language = {
   loginButton: {
-    en: "Login",
-    al: "Kyçu",
+    en: 'Login',
+    al: 'Kyçu',
   },
   loginTitle: {
-    en: "Degree management system",
-    al: "Sistemi i menaxhimit te diplomave",
+    en: 'Degree Management System',
+    al: 'Sistemi i Menaxhimit të Diplomave',
   },
-};
+}
 
-export default language;
+export default language

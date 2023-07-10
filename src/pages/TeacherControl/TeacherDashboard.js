@@ -1,15 +1,28 @@
 import { Col, Menu, Row, Space, Table, Typography } from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { controlLabels } from '../../globals/constants'
 import './TeacherDashboard.css'
 import { useNavigate } from 'react-router-dom'
+import { getDiplomasForTeacher } from './teacher.service'
 const { Title } = Typography
 
 const TeacherDashboard = () => {
-  const [current, setCurrent] = useState('mail')
+  const [current, setCurrent] = useState(1)
   const [file, setFile] = useState({})
+  const [page, setPage] = useState(1)
+  const [data, setData] = useState()
   const navigate = useNavigate()
 
+  const getDiplomasList = async () => {
+    console.log('here')
+    const response = await getDiplomasForTeacher(page)
+    //setPage((prevPage) => page + 1)
+    setData(response.data?.students)
+  }
+
+  useEffect(() => {
+    getDiplomasList()
+  }, [])
   const onClick = (e) => {
     console.log('click ', e)
     setCurrent(e.key)
@@ -28,7 +41,7 @@ const TeacherDashboard = () => {
       statusi: '10 Downing Street',
     },
     {
-      key: '2',
+      key: '3',
       tema: 'John',
       studenti: 42,
       statusi: '10 Downing Street',
@@ -56,7 +69,7 @@ const TeacherDashboard = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={() => navigate('/home/document')}>Shiko</a>
+          <a onClick={() => navigate('/controls/document')}>Shiko</a>
         </Space>
       ),
     },
@@ -65,7 +78,7 @@ const TeacherDashboard = () => {
     <Row justify="center" align="top" style={{ textAlign: 'center' }}>
       <Col xs={{ span: 20 }} xl={{ span: 10 }}>
         <Title level={3}>Kontrollet</Title>
-        <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={controlLabels} style={{ fontSize: 20 }} />
+        <Menu onClick={onClick} defaultActiveFirst={1} selectedKeys={[current]} mode="horizontal" items={controlLabels} style={{ fontSize: 20 }} />
         <Table
           className="custom-table"
           dataSource={dataSource}
