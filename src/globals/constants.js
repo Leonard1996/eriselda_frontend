@@ -6,18 +6,18 @@ export const BASE_API = 'http://38.242.237.75:3333'
 export const controlLabels = [
   {
     label: 'Kontrolli I',
-    key: 1,
+    key: 0,
     icon: <ContainerOutlined />,
   },
   {
     label: 'Kontrolli II',
-    key: 2,
+    key: 1,
     icon: <ContainerOutlined />,
     disabled: false,
   },
   {
     label: 'Kontrolli III',
-    key: 3,
+    key: 2,
     icon: <ContainerOutlined />,
     disabled: false,
   },

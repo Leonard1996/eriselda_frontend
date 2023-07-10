@@ -6,19 +6,23 @@ import Title from 'antd/es/typography/Title'
 import ControlForm from '../../globals/components/Forms/ControlForm'
 import { controlLabels } from '../../globals/constants'
 import { createDiploma, getDiploma, homeService } from '../Home/home.service'
+import dayjs from 'dayjs'
 
 const StudentDashboard = () => {
-  const [current, setCurrent] = useState(1)
+  const [current, setCurrent] = useState(0)
   const [file, setFile] = useState({})
   const [diploma, setDiploma] = useState()
   const [control, setControl] = useState()
 
   const getInfo = async () => {
-    const response = await homeService.getDiploma(current)
+    const response = await homeService.getDiploma(+current + 1)
+
     setDiploma(response?.data)
-    setControl(response?.data?.diploma?.control)
+    if (response?.data?.diplomas[0]) {
+      setControl({ ...response?.data?.diplomas[0]?.controls[0], from: dayjs().year(response?.data?.diplomas[0]?.controls[0].from), to: dayjs().year(response?.data?.diplomas[0]?.controls[0].to) })
+    }
   }
-  const [api, contextHolder] = notification.useNotification()
+  const [api, contextHolder] = notification.useNotification(current)
   const openNotificationWithIcon = (type) => {
     console.log(type)
     api[type]({
@@ -31,12 +35,15 @@ const StudentDashboard = () => {
   }, [current])
 
   const onClick = (e) => {
+    console.log(e.key, '----------------')
     setCurrent(e.key)
   }
-  const createDiplomaHadler = async (formData) => {
-    openNotificationWithIcon('success')
+  const createDiplomaHandler = async (formData) => {
     const result = await createDiploma(formData)
-    console.log(result)
+    if (result.request?.status == 200) {
+      openNotificationWithIcon('success')
+    }
+    getInfo()
   }
 
   return (
@@ -52,8 +59,8 @@ const StudentDashboard = () => {
             diploma={diploma}
             current={current}
             control={control}
-            disabled={diploma?.status === 'Mbyllur' || diploma?.status === 'Ne pritje' || diploma?.status === 'Pranuar'}
-            createDiploma={createDiplomaHadler}
+            disabled={control?.status === 'Mbyllur' || control?.status !== 'Ne pritje' || control?.status === 'Pranuar'}
+            createDiploma={createDiplomaHandler}
           />
         </Col>
       </Row>
