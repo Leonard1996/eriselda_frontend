@@ -15,7 +15,7 @@ const TeacherDashboard = () => {
 
   const getDiplomasList = async () => {
     console.log('here')
-    const response = await getDiplomasForTeacher(page)
+    const response = await getDiplomasForTeacher(page, current)
     //setPage((prevPage) => page + 1)
     setData(response.data?.students.map((student) => ({ ...student, key: student.id })))
   }
