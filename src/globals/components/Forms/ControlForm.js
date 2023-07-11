@@ -85,7 +85,7 @@ const ControlForm = ({ setFile, diploma, current, createDiploma, disabled, contr
               </p>
               <p className="ant-upload-text">Kliko për të ngarkuar dokumentin</p>
             </Dragger>
-            <div>{control.document && !file && <a href={BASE_API + '/' + control.document}>{control.document}</a>}</div>
+            <div>{control.document && !file && <a href={BASE_API + '/' + control.document}>{control.originalDocument}</a>}</div>
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" style={{ width: '100%', height: 50 }}>
