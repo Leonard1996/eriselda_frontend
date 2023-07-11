@@ -19,6 +19,9 @@ const content = (
   </div>
 );
 const Notification = () => {
+  const handleNotificationsClick = () => {
+    console.log("here");
+  };
   return (
     <div style={{ position: "relative", margin: 0 }}>
       <div
@@ -44,7 +47,7 @@ const Notification = () => {
         arrow={{ pointAtCenter: true }}
         style={{ padding: "0px" }}
       >
-        <BellOutlined style={{ fontSize: "30px" }} />
+        <BellOutlined style={{ fontSize: "30px" }} onClick={handleNotificationsClick} />
       </Popover>
     </div>
   );
