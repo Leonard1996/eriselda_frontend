@@ -1,8 +1,11 @@
 import { Button, Col, Form, Input, Row, Select, Typography } from 'antd'
+import { useLocation } from 'react-router-dom'
 const { TextArea } = Input
 const { Title } = Typography
 
 const Document = () => {
+  let { state } = useLocation()
+  console.log(state)
   return (
     <Row justify="center" align="top" style={{ textAlign: 'center' }}>
       <Col xs={{ span: 20 }} xl={{ span: 10 }}>
