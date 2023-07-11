@@ -15,7 +15,7 @@ const StudentDashboard = () => {
   const [control, setControl] = useState()
 
   const getInfo = async () => {
-    const response = await homeService.getDiploma(+current + 1)
+    const response = await homeService.getDiploma(+current + 1, 'Bachelor')
     setDiploma(response?.data)
     if (response?.data?.diploma) {
       setControl({

@@ -14,11 +14,11 @@ const login = async (result) => {
   }
 }
 
-export const getDiploma = async (current) => {
+export const getDiploma = async (current, type) => {
   try {
     return await axios({
       method: 'get',
-      url: BASE_API + `/diplomas?rank=${current}`,
+      url: BASE_API + `/diplomas?rank=${current}&type=${type}`,
       headers: {
         'Ms-Authorization': JSON.parse(localStorage.getItem('authData')).accessToken,
       },

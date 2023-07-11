@@ -10,6 +10,7 @@ const { Dragger } = Upload
 const { Option } = Select
 
 const ControlForm = ({ setFile, diploma, current, createDiploma, disabled, control, file }) => {
+  console.log(control)
   const [selectedItem, setSelectedItem] = useState({})
   const [period, setPeriod] = useState()
   const formData = new FormData()
@@ -21,9 +22,10 @@ const ControlForm = ({ setFile, diploma, current, createDiploma, disabled, contr
     data.from = '2000'
     data.to = period?.to
     data.diplomaId = diploma.diploma.diplomaId ?? null
-    data.studentId = diploma.diploma.studentId ?? null
+    data.studentId = diploma.student?.id ?? null
 
     for (const key in data) {
+      if (!data[key]) continue
       formData.append(key, data[key])
     }
     createDiploma(formData)
@@ -52,14 +54,20 @@ const ControlForm = ({ setFile, diploma, current, createDiploma, disabled, contr
             </Select>
           </Form.Item>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <label>Viti:</label>
+            <label>Viti i studimit:</label>
             <Form.Item label="Nga">
-              <DatePicker picker="year" name="from" onChange={(e) => handleData(e?.$y, 'from')} defaultValue={control.from ?? dayjs()} />
+              <DatePicker picker="year" name="from" onChange={(e) => handleData(e?.$y, 'from')} />
             </Form.Item>
             <Form.Item label="From">
-              <DatePicker picker="year" name="to" onChange={(e) => handleData(e?.$y, 'to')} defaultValue={control.to ?? dayjs()} />
+              <DatePicker picker="year" name="to" onChange={(e) => handleData(e?.$y, 'to')} />
             </Form.Item>
           </div>
+          <Form.Item label="Programi i studimit" name="studyProgram">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Cikli i studimit" name="type">
+            <Input />
+          </Form.Item>
           <Form.Item label="Numri Matrikullimit" name="uniqueNumber">
             <Input />
           </Form.Item>
