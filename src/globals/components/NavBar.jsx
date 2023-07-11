@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Context } from '../../context/LanguageContext'
 import EN from '../../assets/images/EN.png'
 import AL from '../../assets/images/AL.jpg'
 import { BellOutlined } from '@ant-design/icons'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 export default function NavBar() {
   const { setState, state } = React.useContext(Context)
+  const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
 
   const handleLanguageSet = (language) => {
     setState((prevState) => ({
@@ -36,7 +39,7 @@ export default function NavBar() {
         }}
       >
         <div style={{ marginRight: 10 }}>
-          <BellOutlined />
+          <BellOutlined onClick={() => navigate('/notifications')} />
         </div>
         <div onClick={() => handleLanguageSet('al')} style={alStyle}>
           AL

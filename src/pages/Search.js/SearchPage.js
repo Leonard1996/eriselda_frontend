@@ -24,6 +24,12 @@ const SearchPage = () => {
           <Form.Item label="Udhëheqësi">
             <Select placeholder="Zgjidhni udhëheqësin e diplomës" style={{}}></Select>
           </Form.Item>
+          <Form.Item label="Programi i studimit" name="studyProgram">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Cikli i studimit" name="type">
+            <Input />
+          </Form.Item>
           <Form.Item label="Kontrolli">
             <Select placeholder="Zgjidhni Kontrollin" style={{}}></Select>
           </Form.Item>

@@ -5,6 +5,7 @@ import Document from '../../pages/Document/Document'
 import SearchPage from '../../pages/Search.js/SearchPage'
 import StudentDashboard from '../../pages/StudentControl/StudentDashboard'
 import TeacherDashboard from '../../pages/TeacherControl/TeacherDashboard'
+import Notification from '../../pages/Notification'
 
 export const routes = [
   {
@@ -42,5 +43,11 @@ export const routes = [
     path: '/search',
     private: true,
     element: <SearchPage />,
+  },
+  {
+    name: 'Notification Page',
+    path: '/notifications',
+    private: true,
+    element: <Notification />,
   },
 ]
