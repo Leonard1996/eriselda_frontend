@@ -70,7 +70,7 @@ const TeacherDashboard = () => {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={() => navigate('/controls/document')}>Shiko</a>
+          <a onClick={() => navigate('/controls/document', { state: data })}>Shiko</a>
         </Space>
       ),
     },
